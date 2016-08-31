@@ -7,8 +7,8 @@ class Quarter {
         this.value = newValue;
     }
     getImageUrl() : string {
-        return "img/Quarter.png";
+        return "images/Quarter.gif";
     }
 }
 
-var coin = new Quarter
+var coin = new Quarter();
