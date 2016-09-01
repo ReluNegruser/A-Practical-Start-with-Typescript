@@ -8,26 +8,26 @@ abstract class ProductCategory {
 class SodaCategoty extends ProductCategory{
     name = "Soda";
     getImageUrl(){
-        return this.imgPath+ "/SodaCanPS.png";
+        return this.imgPath+ "/SodaCanResize.jpg";
     }
 }
 
 class PotatoChipsCategory extends ProductCategory{
     name = "Chips";
     getImageUrl(){
-        return this.imgPath+ "/Chips.jpg";
+        return this.imgPath+ "/ChipsResize.jpg";
     }
 }
 
 class CandyCategory extends ProductCategory{
     name = "Candy";
     getImageUrl(){
-        return this.imgPath+ "/Candy.png";
+        return this.imgPath+ "/CandyResize.jpg";
     }
 }
 class CandyBarCategory extends ProductCategory{
     name = "Candy Bar";
     getImageUrl(){
-        return this.imgPath+ "/CandyBar.png";
+        return this.imgPath+ "/CandyBarResize.jpg";
     }
 }

@@ -62,7 +62,7 @@ var SodaCategoty = (function (_super) {
         this.name = "Soda";
     }
     SodaCategoty.prototype.getImageUrl = function () {
-        return this.imgPath + "/SodaCanPS.png";
+        return this.imgPath + "/SodaCanResize.jpg";
     };
     return SodaCategoty;
 }(ProductCategory));
@@ -73,7 +73,7 @@ var PotatoChipsCategory = (function (_super) {
         this.name = "Chips";
     }
     PotatoChipsCategory.prototype.getImageUrl = function () {
-        return this.imgPath + "/Chips.jpg";
+        return this.imgPath + "/ChipsResize.jpg";
     };
     return PotatoChipsCategory;
 }(ProductCategory));
@@ -84,7 +84,7 @@ var CandyCategory = (function (_super) {
         this.name = "Candy";
     }
     CandyCategory.prototype.getImageUrl = function () {
-        return this.imgPath + "/Candy.png";
+        return this.imgPath + "/CandyResize.jpg";
     };
     return CandyCategory;
 }(ProductCategory));
@@ -95,7 +95,7 @@ var CandyBarCategory = (function (_super) {
         this.name = "Candy Bar";
     }
     CandyBarCategory.prototype.getImageUrl = function () {
-        return this.imgPath + "/CandyBar.png";
+        return this.imgPath + "/CandyBarResize.jpg";
     };
     return CandyBarCategory;
 }(ProductCategory));
