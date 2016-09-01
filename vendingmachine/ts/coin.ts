@@ -1,43 +1,48 @@
-abstract class Coin {
-    value: number;
-    constructor(value: number){
-        this.value = value;
-    }
-    abstract getImageUrl(): string;
-}
+namespace Coins {
 
-class Quarter extends Coin{
-    constructor(){
-        super(.25);
-    }
-    getImageUrl() : string {
-        return "images/Quarter.gif";
-    }
-}
+    let imgPath = "images/";
 
-class Dime extends Coin {
-    constructor() {
-        super(.1);
+    export abstract class Coin {
+        value: number;
+        constructor(value: number){
+            this.value = value;
+        }
+        abstract getImageUrl(): string;
     }
-    getImageUrl(): string {
-        return "images/Dime.png"
-    }
-}
 
-class Half extends Coin {
-    constructor() {
-        super(.5);
+    export class Quarter extends Coin{
+        constructor(){
+            super(.25);
+        }
+        getImageUrl() : string {
+            return imgPath + "Quarter.gif";
+        }
     }
-    getImageUrl(): string {
-        return "images/Half.jpg"
-    }
-}
 
-class Dollar extends Coin {
-    constructor() {
-        super(1);
+    export class Dime extends Coin {
+        constructor() {
+            super(.1);
+        }
+        getImageUrl(): string {
+            return imgPath + "Dime.png"
+        }
     }
-    getImageUrl(): string {
-        return "images/Dime.png"
+
+    export class Half extends Coin {
+        constructor() {
+            super(.5);
+        }
+        getImageUrl(): string {
+            return imgPath + "Half.jpg"
+        }
+    }
+
+    export class Dollar extends Coin {
+        constructor() {
+            super(1);
+        }
+        getImageUrl(): string {
+            return imgPath + "Dime.png"
+        }
     }
 }
