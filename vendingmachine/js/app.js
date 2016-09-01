@@ -109,6 +109,7 @@ var CandyBarCategory = (function (_super) {
     return CandyBarCategory;
 }(ProductCategory));
 /// <reference path="productCategory.ts" />
+console.log((new Coins.Dime().value));
 var Initial = (function () {
     function Initial() {
         this.name = "Please select product";
