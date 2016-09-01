@@ -3,22 +3,17 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+var Coin = (function () {
+    function Coin(value) {
+        this.value = value;
+    }
+    return Coin;
+}());
 var Quarter = (function (_super) {
     __extends(Quarter, _super);
     function Quarter() {
-        _super.apply(this, arguments);
-        this.value = .25;
+        _super.call(this, .25);
     }
-    Object.defineProperty(Quarter.prototype, "Value", {
-        get: function () {
-            return this.value;
-        },
-        set: function (newValue) {
-            this.value = newValue;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Quarter.prototype.getImageUrl = function () {
         return "images/Quarter.gif";
     };
@@ -27,31 +22,91 @@ var Quarter = (function (_super) {
 var Dime = (function (_super) {
     __extends(Dime, _super);
     function Dime() {
-        _super.apply(this, arguments);
-        this.value = .10;
+        _super.call(this, .1);
     }
-    Object.defineProperty(Dime.prototype, "Value", {
-        get: function () {
-            return this.value;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Dime.prototype.getImageUrl = function () {
         return "images/Dime.png";
     };
     return Dime;
 }(Coin));
-var SodaCategoty = (function () {
+var Half = (function (_super) {
+    __extends(Half, _super);
+    function Half() {
+        _super.call(this, .5);
+    }
+    Half.prototype.getImageUrl = function () {
+        return "images/Half.jpg";
+    };
+    return Half;
+}(Coin));
+var Dollar = (function (_super) {
+    __extends(Dollar, _super);
+    function Dollar() {
+        _super.call(this, 1);
+    }
+    Dollar.prototype.getImageUrl = function () {
+        return "images/Dime.png";
+    };
+    return Dollar;
+}(Coin));
+var ProductCategory = (function () {
+    function ProductCategory() {
+        this.imgPath = "images/";
+    }
+    return ProductCategory;
+}());
+var SodaCategoty = (function (_super) {
+    __extends(SodaCategoty, _super);
     function SodaCategoty() {
+        _super.apply(this, arguments);
         this.name = "Soda";
     }
     SodaCategoty.prototype.getImageUrl = function () {
-        return "images/SodaCanPS.png";
+        return this.imgPath + "/SodaCanPS.png";
     };
     return SodaCategoty;
-}());
+}(ProductCategory));
+var PotatoChipsCategory = (function (_super) {
+    __extends(PotatoChipsCategory, _super);
+    function PotatoChipsCategory() {
+        _super.apply(this, arguments);
+        this.name = "Chips";
+    }
+    PotatoChipsCategory.prototype.getImageUrl = function () {
+        return this.imgPath + "/Chips.jpg";
+    };
+    return PotatoChipsCategory;
+}(ProductCategory));
+var CandyCategory = (function (_super) {
+    __extends(CandyCategory, _super);
+    function CandyCategory() {
+        _super.apply(this, arguments);
+        this.name = "Candy";
+    }
+    CandyCategory.prototype.getImageUrl = function () {
+        return this.imgPath + "/Candy.png";
+    };
+    return CandyCategory;
+}(ProductCategory));
+var CandyBarCategory = (function (_super) {
+    __extends(CandyBarCategory, _super);
+    function CandyBarCategory() {
+        _super.apply(this, arguments);
+        this.name = "Candy Bar";
+    }
+    CandyBarCategory.prototype.getImageUrl = function () {
+        return this.imgPath + "/CandyBar.png";
+    };
+    return CandyBarCategory;
+}(ProductCategory));
 /// <reference path="productCategory.ts" />
+var Initial = (function () {
+    function Initial() {
+        this.name = "Please select product";
+        this.price = 0;
+    }
+    return Initial;
+}());
 var CocaCola = (function () {
     function CocaCola() {
         this.name = "Coca-Cola";
@@ -60,11 +115,42 @@ var CocaCola = (function () {
     }
     return CocaCola;
 }());
+var Gummies = (function () {
+    function Gummies() {
+        this.name = "Gummies";
+        this.price = 1.90;
+        this.category = new CandyCategory();
+    }
+    return Gummies;
+}());
+var Snickers = (function () {
+    function Snickers() {
+        this.name = "Snickers";
+        this.price = 1.80;
+        this.category = new CandyBarCategory();
+    }
+    return Snickers;
+}());
+var Lays = (function () {
+    function Lays() {
+        this.name = "Lays";
+        this.price = 3.20;
+        this.category = new PotatoChipsCategory();
+    }
+    return Lays;
+}());
+/// <reference path="product.ts" />
 var productFactory = (function () {
     function productFactory() {
     }
     productFactory.GetProduct = function () {
-        return new CocaCola();
+        var random = Math.floor(Math.random() * 4);
+        switch (random) {
+            case 0: return new CocaCola();
+            case 1: return new Snickers();
+            case 2: return new Lays();
+            case 3: return new Gummies();
+        }
     };
     return productFactory;
 }());
@@ -89,9 +175,9 @@ var VendingMachine = (function () {
     function VendingMachine() {
         var _this = this;
         this.paid = ko.observable(0);
-        this.selectedCell = ko.observable(new Cell(new CocaCola()));
+        this.selectedCell = ko.observable(new Cell(new Initial()));
         this.cells = ko.observableArray([]);
-        this.acceptedCoins = [new Dime(), new Quarter()];
+        this.acceptedCoins = [new Dime(), new Quarter(), new Half(), new Dollar()];
         this.canPay = ko.pureComputed(function () { return _this.paid() - _this.selectedCell().product.price >= 0; });
         this.select = function (cell) {
             cell.sold(false);
@@ -99,7 +185,7 @@ var VendingMachine = (function () {
         };
         this.acceptCoin = function (coin) {
             var oldTotal = _this.paid();
-            _this.paid(oldTotal + coin.Value);
+            _this.paid(oldTotal + coin.value);
         };
         this.pay = function () {
             if (_this.selectedCell().stock() < 1) {
@@ -126,7 +212,7 @@ var VendingMachine = (function () {
     });
     return VendingMachine;
 }());
-machine = new VendingMachine();
+var machine = new VendingMachine();
 /// <reference path="VendingMachine.ts" />
 var machine = new VendingMachine();
 machine.size = VendingMachineSize.medium;

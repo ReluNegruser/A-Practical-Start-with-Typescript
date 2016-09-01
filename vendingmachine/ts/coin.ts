@@ -17,7 +17,7 @@ class Quarter extends Coin{
 
 class Dime extends Coin {
     constructor() {
-        super(.10);
+        super(.1);
     }
     getImageUrl(): string {
         return "images/Dime.png"
@@ -29,7 +29,7 @@ class Half extends Coin {
         super(.5);
     }
     getImageUrl(): string {
-        return "images/Half"
+        return "images/Half.jpg"
     }
 }
 
