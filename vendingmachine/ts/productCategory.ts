@@ -31,3 +31,5 @@ class CandyBarCategory extends ProductCategory{
         return this.imgPath+ "/CandyBarResize.jpg";
     }
 }
+
+export {ProductCategory, SodaCategoty, PotatoChipsCategory, CandyBarCategory, CandyCategory}
